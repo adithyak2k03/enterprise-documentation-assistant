@@ -8,4 +8,3 @@ def test_settings_load():
     assert settings.langsmith_tracing
     assert settings.langsmith_api_key
     assert settings.langsmith_project
-

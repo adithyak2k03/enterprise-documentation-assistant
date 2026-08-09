@@ -10,6 +10,8 @@ class Settings(BaseSettings):
     langsmith_api_key: str
     langsmith_project: str
 
+    embedding_model: str
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
