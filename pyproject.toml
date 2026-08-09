@@ -1,9 +1,9 @@
 [project]
 name = "enterprise-documentation-assistant"
 version = "0.1.0"
-description = "Add your description here"
+description = "An enterprise-style documentation assistant using LLMs and RAG"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12,<3.13"
 dependencies = []
 
 [dependency-groups]
@@ -11,3 +11,13 @@ dev = [
     "pytest>=9.1.1",
     "ruff>=0.16.2",
 ]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
