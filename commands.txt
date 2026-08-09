@@ -1,0 +1,99 @@
+
+
+uv run python -m app.ingestion.cli "files\\agentic-ai-foundations.pdf"
+
+uv run python -m app.retrieval.cli "What is this document about?"
+
+uv run python -m app.rag.cli "What are the three pillars of modern software agents?"
+
+uv run python -m app.rag.cli "What is the capital of Japan?"
+
+
+1. Basic retrieval questions
+
+These should be easy for your RAG system:
+
+What are the three pillars of modern software agents?
+What is the actor model?
+Who introduced the actor model?
+What is Nwana's definition of a software agent?
+What are the six attributes in Nwana's agent typology?
+What is the perceive, reason, act cycle?
+What is the purpose of the perception module?
+What does the cognitive module do?
+What is the role of the action module?
+What is the purpose of the learning module?
+
+
+2. Questions that test semantic search
+
+These are better RAG tests because the wording doesn't exactly match the document:
+
+How are software agents different from traditional programs?
+Why does agency matter in addition to autonomy?
+How do agents make decisions in changing environments?
+How can software agents reduce the workload of humans?
+Why is asynchronous communication important for agents?
+How do agents maintain knowledge from previous experiences?
+How does an agent turn a user's intent into an actual action?
+Why are LLMs useful as the cognitive core of modern agents?
+
+
+3. Comparison questions
+
+These are excellent for testing whether your retriever brings together information from different parts of the document.
+
+What is the difference between traditional AI, software agents, and agentic AI?
+How do traditional software agents differ from agentic AI?
+Compare autonomy, asynchronicity, and agency.
+How does traditional symbolic reasoning differ from LLM-based agent reasoning?
+What is the difference between short-term and long-term memory in an agent?
+How does RAG differ from continued pretraining as a way of extending an agent's knowledge?
+How does the actor model relate to modern multi-agent systems?
+
+
+4. Multi-hop questions 
+
+These are particularly useful for testing your RAG implementation.
+
+The answer requires information from multiple sections:
+
+How did the actor model contribute to the development of modern agentic AI?
+How did Nwana's agent typology influence the modern definition of software agents?
+How did distributed AI and LLMs eventually converge to create agentic AI?
+How does the perceive-reason-act architecture relate to the perception, cognitive, action, and learning modules?
+How does RAG provide long-term memory for an LLM-based agent?
+Why can agentic AI operate more autonomously than traditional AI systems?
+How do memory, planning, and decision-making work together inside an agent?
+How did developments from 1959 through 2025 contribute to modern agentic AI?
+
+
+5. Specific fact-retrieval questions
+
+These are useful for checking whether your embeddings/retrieval are actually finding the right chunks:
+
+What happened in 1959 in the history of software agents?
+What did Carl Hewitt introduce in 1973?
+What contribution did Victor Lesser make to multi-agent systems?
+What did Nwana publish in 1996?
+What happened in NLP in 2017?
+What happened with ChatGPT in 2022 according to the document?
+What LLM developments occurred in 2023?
+What enterprise agent platforms are mentioned for 2023–2024?
+What is MCP and why is it important?
+What did AWS open source in May 2025?
+
+
+6. Questions your RAG should refuse
+
+This is VERY important for testing your implementation.
+
+Ask questions that are completely outside the document:
+
+What is the capital of France?
+Who is the current CEO of Microsoft?
+How do I configure an AWS Lambda function?
+What is the price of Amazon Bedrock?
+Explain quantum computing.
+Write a Python program to sort a list.
+What is the weather in Chennai today?

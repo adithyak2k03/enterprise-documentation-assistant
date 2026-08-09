@@ -15,8 +15,14 @@ def retrieve(
     if document_id:
         filter_metadata = {"document_id": document_id}
 
-    return vector_store.similarity_search(
+    results = vector_store.similarity_search_with_relevance_scores(
         query,
         k=top_k,
         filter=filter_metadata,
     )
+
+    return [
+        document
+        for document, score in results
+        if score >= 0.3
+    ]
