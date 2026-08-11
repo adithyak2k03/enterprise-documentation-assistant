@@ -1,17 +1,10 @@
-from dataclasses import dataclass
-
 from langchain_core.documents import Document
 from langchain_core.messages import HumanMessage, SystemMessage
 
 from app.llm.service import create_llm
+from app.rag.models import RAGResponse, Source
 from app.rag.prompts import SYSTEM_PROMPT
 from app.retrieval.service import retrieve
-
-
-@dataclass
-class RAGResponse:
-    answer: str
-    sources: list[Document]
 
 
 def build_context(documents: list[Document]) -> str:
@@ -71,5 +64,11 @@ Answer the question using only the documentation context."""
 
     return RAGResponse(
         answer=response.content,
-        sources=documents,
+        sources=[
+            Source(
+                file_name=document.metadata["file_name"],
+                page_number=document.metadata["page_number"],
+            )
+            for document in documents
+        ],
     )

@@ -21,8 +21,4 @@ def retrieve(
         filter=filter_metadata,
     )
 
-    return [
-        document
-        for document, score in results
-        if score >= 0.3
-    ]
+    return [document for document, score in results if score >= 0.3]

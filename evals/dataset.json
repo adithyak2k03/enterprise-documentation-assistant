@@ -1,0 +1,214 @@
+[
+  {
+    "id": "agent-pillars-001",
+    "question": "What are the three pillars of modern software agents?",
+    "expected_answer": "The three pillars are autonomy, asynchronicity, and agency.",
+    "expected_sources": [
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 10
+      }
+    ],
+    "answerable": true,
+    "category": "Answerable"
+  },
+  {
+    "id": "agent-autonomy-002",
+    "question": "What does autonomy mean for modern software agents?",
+    "expected_answer": "Autonomy means that agents operate independently, make decisions based on internal state and environmental context, and function without continuous human supervision or hardcoded control flows.",
+    "expected_sources": [
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 11
+      }
+    ],
+    "answerable": true,
+    "category": "Answerable"
+  },
+  {
+    "id": "agent-perception-003",
+    "question": "What is the purpose of the perception module?",
+    "expected_answer": "The perception module enables an agent to interface with its environment through inputs such as text, audio, and sensors. It extracts meaningful features and representations to build an understanding of the current context.",
+    "expected_sources": [
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 23
+      }
+    ],
+    "answerable": true,
+    "category": "Answerable"
+  },
+  {
+    "id": "agent-delegated-intent-004",
+    "question": "What is delegated intent?",
+    "expected_answer": "Delegated intent means that an agent acts on behalf of a user, another system, or a higher-level service. It operates independently while making choices aligned with the delegator's goals.",
+    "expected_sources": [
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 15
+      }
+    ],
+    "answerable": true,
+    "category": "Answerable"
+  },
+  {
+    "id": "agent-nwana-typology-005",
+    "question": "What are the six attributes in Nwana's agent typology?",
+    "expected_answer": "The six attributes are autonomy, social ability, reactivity, proactivity, adaptability and learning, and mobility.",
+    "expected_sources": [
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 9
+      },
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 10
+      }
+    ],
+    "answerable": true,
+    "category": "Answerable"
+  },
+  {
+    "id": "agent-perceive-reason-act-006",
+    "question": "How does the perceive, reason, act cycle enable an agent to operate autonomously?",
+    "expected_answer": "The agent first perceives information from its environment, then reasons about its beliefs, goals, and context, and finally selects and executes actions. The results of those actions influence subsequent perceptions, creating a continuous feedback loop.",
+    "expected_sources": [
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 14
+      },
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 28
+      }
+    ],
+    "answerable": true,
+    "category": "Answerable but requires combining information"
+  },
+  {
+    "id": "agent-modern-pillars-007",
+    "question": "How do autonomy, asynchronicity, and agency together distinguish software agents from traditional automation?",
+    "expected_answer": "Autonomy allows agents to operate independently, asynchronicity allows them to respond to events without blocking or linear workflows, and agency gives them goal-directed behavior, decision-making, delegated intent, and contextual reasoning. Together, these characteristics enable purposeful behavior beyond traditional reactive automation.",
+    "expected_sources": [
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 10
+      },
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 11
+      },
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 12
+      }
+    ],
+    "answerable": true,
+    "category": "Answerable but requires combining information"
+  },
+  {
+    "id": "agent-memory-learning-008",
+    "question": "How do short-term memory, long-term memory, and learning work together in an agent?",
+    "expected_answer": "Short-term memory maintains transient context such as dialogue state and current task information, while long-term memory stores persistent knowledge from previous experiences. The learning module uses feedback from perception and action to refine the agent's models, strategies, and decision policies over time.",
+    "expected_sources": [
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 25
+      },
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 26
+      }
+    ],
+    "answerable": true,
+    "category": "Answerable but requires combining information"
+  },
+  {
+    "id": "agent-rag-009",
+    "question": "How does RAG contribute to long-term memory and reliability in generative AI agents?",
+    "expected_answer": "RAG retrieves relevant information from external sources and adds it to the LLM prompt. This extends the agent's effective memory and grounds its responses in external facts or personalized context, improving reliability and factual correctness.",
+    "expected_sources": [
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 30
+      }
+    ],
+    "answerable": true,
+    "category": "Answerable"
+  },
+  {
+    "id": "agent-actor-model-010",
+    "question": "How did the actor model influence modern software agents?",
+    "expected_answer": "The actor model introduced independent entities with isolated state and behavior that communicate through asynchronous messages and can dynamically create or delegate tasks. These concepts provided a foundation for decentralized reasoning, concurrency, reactivity, and modern distributed agent architectures.",
+    "expected_sources": [
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 8
+      },
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 18
+      }
+    ],
+    "answerable": true,
+    "category": "Answerable but requires combining information"
+  },
+  {
+    "id": "agent-ai-comparison-011",
+    "question": "What is the primary difference between traditional AI, software agents, and agentic AI?",
+    "expected_answer": "Traditional AI primarily performs prediction or classification with limited autonomy. Software agents add autonomy and communication but often operate within predefined bounds. Agentic AI combines high autonomy, asynchronous event-driven behavior, delegated intent, contextual reasoning, memory, and adaptive goal-directed behavior.",
+    "expected_sources": [
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 31
+      },
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 32
+      },
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 33
+      }
+    ],
+    "answerable": true,
+    "category": "Answerable but requires combining information"
+  },
+  {
+    "id": "agent-bedrock-agents-012",
+    "question": "Which AWS service provides a fully managed way to build goal-driven, tool-using software agents?",
+    "expected_answer": "Amazon Bedrock Agents provides a fully managed way to build goal-driven, tool-using software agents using foundation models from Amazon Bedrock.",
+    "expected_sources": [
+      {
+        "file_name": "agentic-ai-foundations.pdf",
+        "page_number": 20
+      }
+    ],
+    "answerable": true,
+    "category": "Answerable"
+  },
+  {
+    "id": "agent-strands-language-013",
+    "question": "What programming language should developers use to build Strands Agents applications?",
+    "expected_answer": null,
+    "expected_sources": [],
+    "answerable": false,
+    "category": "Unanswerable"
+  },
+  {
+    "id": "agent-bedrock-cost-014",
+    "question": "What is the annual licensing cost of Amazon Bedrock Agents?",
+    "expected_answer": null,
+    "expected_sources": [],
+    "answerable": false,
+    "category": "Unanswerable"
+  },
+  {
+    "id": "agent-healthcare-framework-015",
+    "question": "Which software agent framework is officially recommended by AWS for building healthcare applications?",
+    "expected_answer": null,
+    "expected_sources": [],
+    "answerable": false,
+    "category": "Unanswerable"
+  }
+]

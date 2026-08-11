@@ -5,9 +5,7 @@ from app.rag.service import answer_question
 
 def main() -> None:
     if len(sys.argv) != 2:
-        raise SystemExit(
-            'Usage: python -m app.rag.cli "<question>"'
-        )
+        raise SystemExit('Usage: python -m app.rag.cli "<question>"')
 
     question = sys.argv[1]
 
@@ -21,10 +19,7 @@ def main() -> None:
     print("=======")
 
     for source in result.sources:
-        print(
-            f"- {source.metadata.get('file_name')} "
-            f"(page {source.metadata.get('page_number')})"
-        )
+        print(f"- {source.metadata.get('file_name')} (page {source.metadata.get('page_number')})")
 
 
 if __name__ == "__main__":
