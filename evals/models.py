@@ -21,3 +21,15 @@ class EvaluationCase(BaseModel):
     expected_sources: list[ExpectedSource] = Field(default_factory=list)
     answerable: bool
     category: EvaluationCategory
+
+class JudgeResult(BaseModel):
+    score: int = Field(ge=1, le=5)
+    reasoning: str
+
+
+class EvaluationResult(BaseModel):
+    id: str
+    category: EvaluationCategory
+    source_score: float
+    answer_correctness: JudgeResult | None = None
+    faithfulness: JudgeResult | None = None

@@ -31,6 +31,7 @@ def answer_question(query: str) -> RAGResponse:
             answer="I don't have enough information in the "
             "provided documentation to answer this question.",
             sources=[],
+            context="",
         )
 
     context = build_context(documents)
@@ -71,4 +72,5 @@ Answer the question using only the documentation context."""
             )
             for document in documents
         ],
+        context=context
     )

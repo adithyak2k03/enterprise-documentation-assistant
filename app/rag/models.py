@@ -9,3 +9,4 @@ class Source(BaseModel):
 class RAGResponse(BaseModel):
     answer: str
     sources: list[Source] = Field(default_factory=list)
+    context: str = ""

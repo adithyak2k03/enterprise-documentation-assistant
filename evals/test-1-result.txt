@@ -1,0 +1,147 @@
+(enterprise-documentation-assistant) PS D:\2026 Projects\enterprise-documentation-assistant> uv run python -m evals.runner
+
+Evaluation 1
+Category: Answerable
+Question: What are the three pillars of modern software agents?
+Source score: 1.00
+Abstention correct: True
+Answer: The three pillars of modern software agents are autonomy, asynchronicity, and agency [Source 1, Source 2, Source 3]. These principles distinguish software agents from standard services or automation scripts [Source 1, Source 3].
+
+Evaluation 2
+Category: Answerable
+Question: What does autonomy mean for modern software agents?
+Source score: 1.00
+Abstention correct: True
+Answer: For modern software agents, autonomy means that they are systems capable of acting independently, reacting to inputs, and making decisions based on internal rules or objectives [Source 4]. It is one of the three interdependent principles that distinguish software agents from standard services or automation scripts [Source 1]. Autonomy is considered a necessary feature for a system to be a true software agent, though not sufficient on its own [Source 2].
+
+Evaluation 3
+Category: Answerable
+Question: What is the purpose of the perception module?
+Source score: 1.00
+Abstention correct: True
+Answer: The perception module (also referred to as the perceive module) acts as the agent's sensory interface with the external world. Its purpose is to transform raw environmental input into structured representations that inform reasoning [Source 3].
+
+Key functions include:
+*   Handling multimodal data such as text, audio, or sensor signals [Source 3].
+*   Extracting meaningful features and representations from raw data [Source 2].
+*   Performing feature extraction, object or event recognition, and semantic interpretation to create a meaningful model of the current situation [Source 2, Source 3].
+*   Constructing an accurate and actionable understanding of the agent's current context [Source 2].
+*   Providing structured context for downstream decision-making and anchoring the agent's reasoning in real-world observations [Source 3].
+
+It forms the critical first step in the perceive, reason, act loop, ensuring that downstream reasoning and decision-making are grounded in relevant, up-to-date situational awareness [Source 2].
+
+Evaluation 4
+Category: Answerable
+Question: What is delegated intent?
+Source score: 1.00
+Abstention correct: True
+Answer: Delegated intent refers to the shift in decision-making from users to agents [Source 1]. When intent is delegated, systems become more responsive, resilient, and human-centric, adapting in real time to new information or disruptions [Source 1].
+
+This enables agents to:
+*   Detect and respond to predefined or emergent conditions [Source 1].
+*   Automate repetitive, high-volume decisions [Source 1].
+*   React to environmental changes with minimal latency [Source 1].
+
+Software agents, in this context, act with purpose, evaluating goals, weighing context, and making informed choices. They pursue goals instead of only responding to triggers and can revise beliefs and intentions based on experience or feedback. This intentionality makes them autonomous collaborators in intelligent systems [Source 4].
+
+Evaluation 5
+Category: Answerable
+Question: What are the six attributes in Nwana's agent typology?
+Source score: 0.50
+Abstention correct: True
+Answer: Nwana's agent typology introduces a classification system based on six key attributes. The documentation lists five of these attributes:
+*   Autonomy
+*   Social ability
+*   Reactivity
+*   Proactivity
+*   Adaptability and learning
+
+The documentation states there are six attributes but only provides five, so the full list of six attributes is not available in the provided context [Source 1].
+
+Evaluation 6
+Category: Answerable but requires combining information
+Question: How does the perceive, reason, act cycle enable an agent to operate autonomously?
+Source score: 1.00
+Abstention correct: True
+Answer: The perceive, reason, act cycle defines how software agents operate autonomously in dynamic environments [Source 1]. This cognitive cycle is at the core of every software agent [Source 1].
+
+Evaluation 7
+Category: Answerable but requires combining information
+Question: How do autonomy, asynchronicity, and agency together distinguish software agents from traditional automation?
+Source score: 0.67
+Abstention correct: True
+Answer: Autonomy, asynchronicity, and agency together distinguish software agents from standard services or automation scripts [Source 2, Source 4]. These three interdependent principles enable software agents to operate with purpose, resilience, and intelligence in distributed, real-time environments [Source 4].
+
+While autonomy (acting independently, reacting to inputs, and making decisions based on internal rules or objectives) and asynchronicity (participating in real-time systems and coordinating fluidly and efficiently) are necessary, they alone are not sufficient to make a system a true software agent [Source 1, Source 4]. The critical differentiator is agency, which introduces:
+*   **Goal-directed behavior:** Agents pursue objectives and evaluate progress toward them.
+*   **Decision-making:** Agents assess options and choose actions based on rules, models, or learned policies.
+*   **Delegated intent:** Agents act on behalf of a person, system, or organization with an embedded sense of purpose.
+*   **Contextual reasoning:** Agents incorporate memory or models of their environment to guide behavior intelligently [Source 1].
+
+A system that is autonomous and asynchronous might still be a reactive service; what makes it a software agent is its ability to act with intention and purpose, to be agentic [Source 1].
+
+Evaluation 8
+Category: Answerable but requires combining information
+Question: How do short-term memory, long-term memory, and learning work together in an agent?
+Source score: 1.00
+Abstention correct: True
+Answer: The learning module operates in coordination with both short-term and long-term memory [Source 2].
+
+*   **Learning module:** Enables agents to adapt, generalize, and improve over time based on experience. It supports the reasoning process by continuously refining the agent's internal models, strategies, and decision policies using feedback from perception and action [Source 2].
+*   **Short-term memory:** Stores transient context, such as dialogue state, current task information, and recent observations. It helps the agent maintain continuity within interactions and tasks [Source 2].
+*   **Long-term memory:** Encodes persistent knowledge from past experiences, including previously encountered goals, outcomes of actions, and environmental states. This enables the agent to recognize patterns, reuse strategies, and avoid repeating mistakes [Source 1, Source 2].
+
+Evaluation 9
+Category: Answerable
+Question: How does RAG contribute to long-term memory and reliability in generative AI agents?
+Source score: 1.00
+Abstention correct: True
+Answer: Retrieval-Augmented Generation (RAG) contributes to long-term memory and reliability in generative AI agents by enhancing LLM performance through the combination of retrieved knowledge with generative capabilities. When a goal or query is issued, the agent searches a retrieval index (e.g., through semantic search of documents, earlier conversations, or structured knowledge). The retrieved results are then appended to the LLM prompt, which grounds the generation in external facts or personalized context. This process extends the agent's effective memory and improves reliability and factual correctness [Source 1, Source 2].
+
+Evaluation 10
+Category: Answerable but requires combining information
+Question: How did the actor model influence modern software agents?
+Source score: 1.00
+Abstention correct: True
+Answer: The actor model significantly influenced modern software agents by providing their theoretical foundation, architectural paradigm, and conceptual grounding. Introduced by Carl Hewitt in the 1970s, the actor model treats computation as independent, concurrently executing entities (actors) that encapsulate their own state, interact through asynchronous message passing, and can create new actors and delegate tasks (Source 2, Source 4).
+
+This model provided the conceptual foundation for decentralized reasoning, reactivity, and isolation, which are fundamental to the behavioral architecture of modern software agents (Source 4). Consequently, software agents are built on the principles of the actor model, enabling systems that are not only reactive but also proactive and purposeful, bringing autonomy, context-awareness, and intelligent delegation to modern computing (Source 3).
+
+Evaluation 11
+Category: Answerable but requires combining information
+Question: What is the primary difference between traditional AI, software agents, and agentic AI?
+Source score: 1.00
+Abstention correct: True
+Answer: The primary differences between traditional AI, software agents, and agentic AI are:
+
+*   **Traditional AI** is tool-centric and functionally narrow, focusing on prediction or classification (Source 3). It has no agency and low context awareness, often being stateless or snapshot-based (Source 1). Its autonomy is limited, often requiring human or external orchestration (Source 2).
+*   **Traditional software agents** introduce autonomy and basic communication, but they are often rule-bound or static (Source 3). They operate with implicit or basic agency and moderate context awareness, with some state tracking (Source 1). Their autonomy is medium, operating independently within predefined bounds (Source 2).
+*   **Agentic AI** brings together autonomy, asynchrony, and agency, enabling intelligent, goal-driven entities that can reason, act, and adapt within complex systems (Source 3). It operates with explicit agency, purpose, goals, and self-direction, and high context awareness using memory, situational context, and environment models (Source 1). Agentic AI has high autonomy, acting independently with adaptive strategies, and proactivity is a core attribute that drives goal-directed behavior (Source 2).
+
+Evaluation 12
+Category: Answerable
+Question: Which AWS service provides a fully managed way to build goal-driven, tool-using software agents?
+Source score: 1.00
+Abstention correct: True
+Answer: **Amazon Bedrock Agents** introduced a fully managed way to build goal-driven, tool-using software agents by using foundation models from Amazon Bedrock (Source 2).
+
+Evaluation 13
+Category: Unanswerable
+Question: What programming language should developers use to build Strands Agents applications?
+Source score: 0.00
+Abstention correct: False
+Answer: I do not have enough information to answer your question. The provided documentation mentions that "Strands Agents follows a model-ﬁrst design philosophy" and "enables developers to use foundation models across platforms" ([Source 1]), but it does not specify the programming language developers should use.
+
+Evaluation 14
+Category: Unanswerable
+Question: What is the annual licensing cost of Amazon Bedrock Agents?
+Source score: 0.00
+Abstention correct: False
+Answer: I do not have enough information to answer your question. The provided documentation mentions Amazon Bedrock Agents as a fully managed way to build goal-driven, tool-using software agents [Source 1, Page 20] and lists it as an AWS reference [Source 4, Page 35], but it does not contain any details about its annual licensing cost.
+
+Evaluation 15
+Category: Unanswerable
+Question: Which software agent framework is officially recommended by AWS for building healthcare applications?
+Source score: 0.00
+Abstention correct: False
+Answer: I do not have enough information to answer your question. The provided documentation discusses the purpose, foundations, and concepts of software agents and agentic AI, but it does not mention any specific software agent framework officially recommended by AWS for building healthcare applications.

@@ -3,6 +3,10 @@ from pathlib import Path
 
 from app.rag.models import Source
 from app.rag.service import answer_question
+from evals.judge import (
+    judge_answer_correctness,
+    judge_faithfulness,
+)
 from evals.models import EvaluationCase
 
 DATASET_PATH = Path(__file__).parent / "dataset.json"
@@ -59,13 +63,47 @@ def run_evaluations() -> None:
             result.answer,
         )
 
+        answer_correctness = None
+        faithfulness = None
+
+        if case.answerable and case.expected_answer:
+            answer_correctness = judge_answer_correctness(
+                question=case.question,
+                expected_answer=case.expected_answer,
+                generated_answer=result.answer,
+            )
+
+            faithfulness = judge_faithfulness(
+                question=case.question,
+                context=result.context,
+                generated_answer=result.answer,
+            )
+
         print(f"\nEvaluation {index}")
         print(f"Category: {case.category}")
         print(f"Question: {case.question}")
         print(f"Source score: {source_score:.2f}")
         print(f"Abstention correct: {abstention_correct}")
-        print(f"Answer: {result.answer}")
 
+        if answer_correctness:
+            print(
+                f"Answer correctness: "
+                f"{answer_correctness.score}/5"
+            )
+            print(
+                f"Reason: {answer_correctness.reasoning}"
+            )
+
+        if faithfulness:
+            print(
+                f"Faithfulness: "
+                f"{faithfulness.score}/5"
+            )
+            print(
+                f"Reason: {faithfulness.reasoning}"
+            )
+
+        print(f"Answer: {result.answer}")
 
 if __name__ == "__main__":
     run_evaluations()
