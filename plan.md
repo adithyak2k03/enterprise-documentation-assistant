@@ -90,6 +90,37 @@ The project uses dependency locking through `uv.lock`.
 
 ---
 
+## Next Planned Milestones
+
+After the document upload/list/delete layer, the next concrete work items are:
+
+1. Conversation memory
+   - persist chat history in SQLite
+   - retain recent turns without flooding the prompt
+   - expose conversation APIs for create/list/load/delete
+
+2. Multi-turn chat flow
+   - respond to follow-up questions using prior context
+   - keep memory bounded and relevant
+
+3. Upload-to-vector ingestion
+   - automatically embed newly uploaded documents
+   - add them to the retrieval corpus without manual CLI steps
+
+4. Retrieval quality tuning
+   - tune chunk sizes and relevance thresholds
+   - add evidence-quality safeguards
+
+5. Optional search fallback
+   - add a web/search source when doc coverage is insufficient
+
+6. Deployment-ready polish
+   - Docker packaging
+   - environment validation
+   - basic operational logging
+
+---
+
 # 4. Configuration
 
 Status: **Completed**

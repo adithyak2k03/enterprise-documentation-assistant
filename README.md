@@ -208,19 +208,40 @@ Then open the Swagger UI:
 http://127.0.0.1:8000/docs
 ```
 
-The API currently exposes a minimal query endpoint:
+### Swagger smoke test checklist
 
-```http
-POST /query
-```
+Test these in order from the Swagger UI:
 
-Example body:
+1. `GET /health`
+   - should return `{"status": "ok"}`
+2. `POST /documents`
+   - upload a small PDF or text file
+   - confirm 201 response with `id`, `file_name`, `stored_name`, `mime_type`, and `uploaded_at`
+3. `GET /documents`
+   - confirm the uploaded document appears in the returned list
+4. `DELETE /documents/{document_id}`
+   - confirm the document is removed and the response contains `deleted: true`
+5. `POST /query`
+   - submit a question like `"What does this document say about agents?"`
+   - confirm a valid answer payload with `answer`, `sources`, and `context`
 
-```json
-{
-  "question": "What does this document say about agents?"
-}
-```
+Expected validation notes:
+
+- document upload should reject empty filenames
+- document upload should reject empty files
+- query should reject blank questions with HTTP 400
+- missing document IDs should return 404 on delete
+
+### Next planned components
+
+The next milestones after this document-management layer are:
+
+1. conversation memory for multi-turn follow-up questions
+2. conversation API endpoints and persisted chat history
+3. ingest uploaded documents into the vector store automatically
+4. retrieval tuning and bounded context handling
+5. optional web/search fallback for missing-document cases
+6. deployment and Docker packaging once the core flow is stable
 
 ## RAG Pipeline
 
