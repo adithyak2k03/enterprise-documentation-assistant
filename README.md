@@ -19,6 +19,9 @@ The project is being built incrementally, with the focus on understanding the un
 - Gemini-based answer generation
 - Context-grounded responses
 - Source information in responses
+- LangGraph orchestration around the RAG flow
+- FastAPI app wrapper for local query access
+- Swagger/OpenAPI docs for local testing
 - LangSmith tracing for LLM/RAG execution
 - Environment-based configuration
 - Pytest-based testing
@@ -78,11 +81,16 @@ flowchart TD
 enterprise-documentation-assistant/
 │
 ├── app/
+│   ├── api.py
 │   ├── config.py
 │   ├── cli.py
 │   │
 │   ├── llm/
 │   │   ├── prompts.py
+│   │   └── service.py
+│   │
+│   ├── langgraph/
+│   │   ├── __init__.py
 │   │   └── service.py
 │   │
 │   ├── ingestion/
@@ -106,6 +114,10 @@ enterprise-documentation-assistant/
 │       └── cli.py
 │
 ├── tests/
+│   ├── test_api.py
+│   ├── test_config.py
+│   ├── test_langgraph.py
+│   └── ...
 ├── docs/
 ├── .env.example
 ├── .gitignore
@@ -184,6 +196,32 @@ Run linting:
 uv run ruff check .
 ```
 
+Start the FastAPI app locally:
+
+```bash
+uv run uvicorn app.api:app --reload
+```
+
+Then open the Swagger UI:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+The API currently exposes a minimal query endpoint:
+
+```http
+POST /query
+```
+
+Example body:
+
+```json
+{
+  "question": "What does this document say about agents?"
+}
+```
+
 ## RAG Pipeline
 
 The current implementation follows a simple two-step RAG architecture.
@@ -247,15 +285,13 @@ Sensitive information such as API keys should never be added to application logs
 
 The project is intentionally being developed incrementally.
 
-The current implementation focuses on establishing a working RAG foundation before adding application infrastructure such as FastAPI and LangGraph.
+The current implementation focuses on a working RAG foundation plus a minimal orchestration and API layer. LangGraph is used as a thin orchestration wrapper, while FastAPI remains a lightweight local API surface for testing and demonstration.
 
 The next planned milestones are:
 
 - Improve retrieval quality and introduce a practical evaluation dataset
 - Add conversation history
-- Introduce LangGraph where it provides a clear benefit
-- Expose the application through FastAPI
-- Add document management APIs
+- Add document upload and listing endpoints if the API needs to support more real-world workflows
 - Add Docker-based deployment
 - Consider a lightweight frontend if it adds meaningful value
 
