@@ -11,6 +11,7 @@ dependencies = [
     "langchain-community>=0.4.2",
     "langchain-google-genai>=4.3.2",
     "langchain-text-splitters>=1.1.2",
+    "langgraph>=1.2.10",
     "langsmith>=0.10.17",
     "pydantic-settings>=2.15.0",
     "pypdf>=6.15.0",

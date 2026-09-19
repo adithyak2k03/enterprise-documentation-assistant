@@ -19,7 +19,7 @@ def main() -> None:
     print("=======")
 
     for source in result.sources:
-        print(f"- {source.metadata.get('file_name')} (page {source.metadata.get('page_number')})")
+        print(f"- {source.file_name} (page {source.page_number})")
 
 
 if __name__ == "__main__":

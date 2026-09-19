@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     langsmith_tracing: bool = True
     langsmith_api_key: str
     langsmith_project: str
+    langsmith_endpoint: str
 
     embedding_model: str
 
