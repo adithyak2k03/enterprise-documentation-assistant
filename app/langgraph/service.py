@@ -41,7 +41,8 @@ def retrieve_step(state: LangGraphState) -> LangGraphState:
 def no_documents_step(state: LangGraphState) -> LangGraphState:
     return {
         **state,
-        "answer": "I don't have enough information in the provided documentation to answer this question.",
+        "answer": "I don't have enough information in the"
+        " provided documentation to answer this question.",
         "sources": [],
         "context": "",
     }
@@ -70,7 +71,8 @@ def verify_step(state: LangGraphState) -> LangGraphState:
 
 
 def retry_step(state: LangGraphState) -> LangGraphState:
-    return {**state, "answer": "I don't have enough information in the provided documentation to answer this question."}
+    return {**state, "answer": "I don't have enough information "
+    "in the provided documentation to answer this question."}
 
 
 def build_graph():
