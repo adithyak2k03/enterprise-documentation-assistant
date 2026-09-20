@@ -10,6 +10,7 @@ from app.retrieval.service import retrieve
 
 class LangGraphState(TypedDict):
     question: str
+    conversation_context: str
     documents: list[dict[str, Any]]
     answer: str
     sources: list[dict[str, Any]]
@@ -50,7 +51,8 @@ def no_documents_step(state: LangGraphState) -> LangGraphState:
 
 def generate_step(state: LangGraphState) -> LangGraphState:
     question = state["question"]
-    response = answer_question(question)
+    conversation_context = state.get("conversation_context") or None
+    response = answer_question(question, conversation_context=conversation_context)
 
     return {
         **state,
@@ -108,8 +110,11 @@ def build_graph():
     return graph.compile()
 
 
-def run_question(question: str) -> dict[str, Any]:
-    return rag_graph.invoke({"question": question})
+def run_question(question: str, conversation_context: str | None = None) -> dict[str, Any]:
+    return rag_graph.invoke({
+        "question": question,
+        "conversation_context": conversation_context or "",
+    })
 
 
 rag_graph = build_graph()

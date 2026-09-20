@@ -23,8 +23,20 @@ Content:
     return "\n\n".join(context_parts)
 
 
-def answer_question(query: str) -> RAGResponse:
-    documents = retrieve(query)
+def prepare_query_with_context(query: str, conversation_context: str | None = None) -> str:
+    if not conversation_context:
+        return query
+
+    return (
+        "Conversation history:\n"
+        f"{conversation_context}\n\n"
+        f"User question:\n{query}"
+    )
+
+
+def answer_question(query: str, conversation_context: str | None = None) -> RAGResponse:
+    augmented_query = prepare_query_with_context(query, conversation_context)
+    documents = retrieve(augmented_query)
 
     if not documents:
         return RAGResponse(
@@ -43,10 +55,13 @@ def answer_question(query: str) -> RAGResponse:
 
 {context}
 
+Conversation history:
+{conversation_context or 'None'}
+
 User question:
 {query}
 
-Answer the question using only the documentation context."""
+Answer the question using only the documentation context and the recent conversation history when relevant."""
         ),
     ]
 

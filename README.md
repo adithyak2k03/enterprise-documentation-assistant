@@ -8,23 +8,24 @@ The project is being built incrementally, with the focus on understanding the un
 
 ## Current Features
 
-- PDF document ingestion
-- Document metadata extraction
-- Recursive text chunking
+- PDF and text document ingestion
+- Document upload, list, and delete API lifecycle
+- Local SQLite-backed document persistence
+- Document metadata and file storage handling
+- Recursive text chunking for retrieval
 - Google Gemini embeddings
-- Chroma vector store
-- Similarity-based retrieval
-- Metadata-aware retrieval
-- Retrieval relevance threshold
-- Gemini-based answer generation
-- Context-grounded responses
-- Source information in responses
+- Chroma vector store integration
+- Similarity-based retrieval with relevance safeguards
+- Conversation creation and message persistence in SQLite
+- Bounded recent-context memory for multi-turn Q&A
 - LangGraph orchestration around the RAG flow
-- FastAPI app wrapper for local query access
-- Swagger/OpenAPI docs for local testing
+- FastAPI app wrapper for local testing and debugging
+- Swagger/OpenAPI docs for interactive API validation
+- Query endpoint with optional conversation ID support
+- Context-grounded answer generation with source metadata
 - LangSmith tracing for LLM/RAG execution
 - Environment-based configuration
-- Pytest-based testing
+- Pytest-based testing and API contract checks
 - Ruff linting and formatting
 
 ## Current Architecture
@@ -216,32 +217,47 @@ Test these in order from the Swagger UI:
    - should return `{"status": "ok"}`
 2. `POST /documents`
    - upload a small PDF or text file
-   - confirm 201 response with `id`, `file_name`, `stored_name`, `mime_type`, and `uploaded_at`
+   - confirm a 201 response with `id`, `file_name`, `stored_name`, `mime_type`, `file_path`, and `uploaded_at`
 3. `GET /documents`
    - confirm the uploaded document appears in the returned list
 4. `DELETE /documents/{document_id}`
    - confirm the document is removed and the response contains `deleted: true`
-5. `POST /query`
-   - submit a question like `"What does this document say about agents?"`
+5. `POST /conversations`
+   - create a conversation and confirm the returned `id` and timestamps
+6. `POST /conversations/{conversation_id}/messages`
+   - add a user message and an assistant reply to validate the thread model
+7. `GET /conversations/{conversation_id}/messages`
+   - confirm the list is returned in order
+8. `POST /query`
+   - submit a question like `"What does this document say about agents?"` with an optional `conversation_id`
    - confirm a valid answer payload with `answer`, `sources`, and `context`
 
 Expected validation notes:
 
 - document upload should reject empty filenames
 - document upload should reject empty files
+- invalid message roles should be rejected with HTTP 400
+- blank message content should be rejected with HTTP 400
 - query should reject blank questions with HTTP 400
 - missing document IDs should return 404 on delete
+- missing conversations should return 404 on message and query requests
 
-### Next planned components
+### Current milestone status
 
-The next milestones after this document-management layer are:
+The project has reached the milestone of a working local RAG + memory-enabled API:
 
-1. conversation memory for multi-turn follow-up questions
-2. conversation API endpoints and persisted chat history
-3. ingest uploaded documents into the vector store automatically
-4. retrieval tuning and bounded context handling
-5. optional web/search fallback for missing-document cases
-6. deployment and Docker packaging once the core flow is stable
+1. persisted document storage and lifecycle
+2. persisted conversation history and bounded chat memory
+3. query endpoint wired to recent conversation context
+4. local API validation via FastAPI and Swagger
+5. contract-level regression coverage in pytest
+
+The next likely steps are not architectural rework but practical hardening:
+
+1. automatic ingestion of uploaded documents into the vector store
+2. retrieval tuning and evaluation coverage
+3. deployment packaging and environment stabilization
+4. optional frontend or operational UI only if a concrete workflow requires it
 
 ## RAG Pipeline
 
@@ -306,14 +322,13 @@ Sensitive information such as API keys should never be added to application logs
 
 The project is intentionally being developed incrementally.
 
-The current implementation focuses on a working RAG foundation plus a minimal orchestration and API layer. LangGraph is used as a thin orchestration wrapper, while FastAPI remains a lightweight local API surface for testing and demonstration.
+The current implementation focuses on a working RAG foundation plus a minimal orchestration and API layer. LangGraph is used as a thin orchestration wrapper, while FastAPI remains a lightweight local API surface for testing and demonstration. The current milestone includes document storage, persisted conversations, and bounded memory support without overbuilding the system beyond the immediate product need.
 
 The next planned milestones are:
 
-- Improve retrieval quality and introduce a practical evaluation dataset
-- Add conversation history
-- Add document upload and listing endpoints if the API needs to support more real-world workflows
-- Add Docker-based deployment
-- Consider a lightweight frontend if it adds meaningful value
+- automatic document-to-vector ingestion after upload
+- retrieval quality improvements and a small evaluation set
+- deployment packaging and environment hardening
+- optional frontend or admin tooling only when user workflows justify it
 
 These will be introduced only when they solve an actual requirement rather than being added for the sake of increasing the technology list.
