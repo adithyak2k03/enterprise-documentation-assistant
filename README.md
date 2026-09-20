@@ -232,6 +232,41 @@ Test these in order from the Swagger UI:
    - submit a question like `"What does this document say about agents?"` with an optional `conversation_id`
    - confirm a valid answer payload with `answer`, `sources`, and `context`
 
+### Upload-to-vector ingestion validation in Swagger
+
+You can validate the upload-to-vector flow from Swagger for the happy path in a practical way:
+
+1. Upload a small text or PDF file through `POST /documents`.
+2. Confirm the upload response returns a valid document record.
+3. Immediately ask a question through `POST /query` that clearly depends on the uploaded content, for example:
+   - `"What is mentioned in this uploaded document about agents?"`
+4. If the ingestion worked correctly, the answer should contain grounded content and the `sources` list should include the uploaded file metadata.
+5. Repeat the same query in a follow-up conversation to confirm the document is still retrievable in the same thread flow.
+
+Important limitation: Swagger can validate the API surface, but it does not expose Chroma internals or the raw vector-store entries. You will not see a direct UI panel showing the underlying embedding collection or chunk metadata. For that reason, the most reliable Swagger-level proof is: file uploaded successfully and `POST /query` returns grounded results from that document.
+
+If you need deeper verification than Swagger can show, use one of these alternatives:
+
+- Run the pytest suite for the ingestion and API tests.
+- Run a direct Python snippet against the app services to inspect the vector store.
+- Use `curl` against the local API to submit the exact upload and query requests outside the browser UI.
+
+Example fallback commands:
+
+```bash
+uv run pytest tests/test_api.py tests/ingestion -q
+```
+
+```bash
+uv run python - <<'PY'
+from app.vector_store.chroma import create_vector_store
+store = create_vector_store()
+print(store.get())
+PY
+```
+
+This is the cleanest way to validate ingestion behavior when the LLM upstream is available and the UI alone is not enough to inspect the vector store.
+
 Expected validation notes:
 
 - document upload should reject empty filenames
@@ -241,6 +276,7 @@ Expected validation notes:
 - query should reject blank questions with HTTP 400
 - missing document IDs should return 404 on delete
 - missing conversations should return 404 on message and query requests
+- an uploaded document should become queryable after upload without requiring a separate CLI ingestion command
 
 ### Current milestone status
 
