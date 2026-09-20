@@ -69,6 +69,27 @@ def test_list_documents_returns_uploaded_files(monkeypatch, tmp_path):
     assert [item["file_name"] for item in payload] == ["doc-two.pdf", "doc-one.pdf"]
 
 
+def test_upload_document_triggers_ingestion(monkeypatch, tmp_path):
+    service = DocumentService(storage_dir=tmp_path / "uploads", database_path=tmp_path / "documents.db")
+    monkeypatch.setattr(api, "document_service", service)
+
+    observed = {}
+
+    def fake_ingest_document(document):
+        observed["document_id"] = document.id
+        return {"document_id": document.id, "status": "completed"}
+
+    monkeypatch.setattr(api, "ingest_document", fake_ingest_document)
+
+    response = client.post(
+        "/documents",
+        files={"file": ("ingest-me.txt", b"alpha beta gamma", "text/plain")},
+    )
+
+    assert response.status_code == 201
+    assert observed["document_id"] == response.json()["id"]
+
+
 def test_delete_document_removes_record_and_file(monkeypatch, tmp_path):
     service = DocumentService(storage_dir=tmp_path / "uploads", database_path=tmp_path / "documents.db")
     monkeypatch.setattr(api, "document_service", service)

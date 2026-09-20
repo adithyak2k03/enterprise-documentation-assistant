@@ -7,6 +7,7 @@ from pydantic import BaseModel, Field
 
 from app.conversations.service import ConversationService
 from app.documents.service import DocumentService
+from app.ingestion.service import ingest_document
 from app.langgraph.service import run_question
 
 
@@ -130,6 +131,8 @@ def upload_document(file: UploadFile = File(...)) -> DocumentUploadResponse:
         file_bytes=content,
         content_type=file.content_type or "application/octet-stream",
     )
+
+    ingest_document(document)
 
     return DocumentUploadResponse(
         id=document.id,
