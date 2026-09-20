@@ -43,3 +43,16 @@ def test_conversation_service_builds_bounded_context(tmp_path):
     assert [message.content for message in recent_messages] == ["second answer", "third question"]
     assert "User: third question" in context
     assert "first question" not in context
+
+
+def test_conversation_service_caps_context_by_length(tmp_path):
+    service = ConversationService(database_path=tmp_path / "conversations.db")
+    conversation = service.create_conversation()
+
+    service.add_message(conversation.id, "user", "A" * 200)
+    service.add_message(conversation.id, "assistant", "B" * 200)
+
+    context = service.get_recent_context(conversation.id, max_turns=10, max_chars=100)
+
+    assert len(context) <= 100 + 3
+    assert "..." in context

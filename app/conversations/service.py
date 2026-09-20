@@ -154,7 +154,12 @@ class ConversationService:
             return []
         return messages[-max_turns:]
 
-    def get_recent_context(self, conversation_id: str, max_turns: int = 6) -> str:
+    def get_recent_context(
+        self,
+        conversation_id: str,
+        max_turns: int = 6,
+        max_chars: int = 1500,
+    ) -> str:
         messages = self.get_recent_messages(conversation_id, max_turns=max_turns)
         if not messages:
             return ""
@@ -164,4 +169,8 @@ class ConversationService:
             role = message.role.capitalize()
             context_lines.append(f"{role}: {message.content}")
 
-        return "\n".join(context_lines)
+        context = "\n".join(context_lines)
+        if len(context) <= max_chars:
+            return context
+
+        return context[:max_chars].rstrip() + "..."
