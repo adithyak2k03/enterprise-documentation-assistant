@@ -14,6 +14,7 @@ from app.langgraph.service import run_question
 class QueryRequest(BaseModel):
     question: str = Field(..., min_length=1)
     conversation_id: str | None = None
+    document_id: str | None = None
 
 
 class SourceResponse(BaseModel):
@@ -94,7 +95,11 @@ def query_documents(payload: QueryRequest) -> QueryResponse:
             )
         conversation_context = conversation_service.get_recent_context(payload.conversation_id, max_turns=6)
 
-    result = run_question(payload.question, conversation_context=conversation_context)
+    result = run_question(
+        payload.question,
+        conversation_context=conversation_context,
+        document_id=payload.document_id,
+    )
 
     sources = [
         SourceResponse(

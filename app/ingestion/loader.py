@@ -5,7 +5,7 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain_core.documents import Document
 
 
-def load_pdf(file_path: str) -> list[Document]:
+def load_pdf(file_path: str, document_id: str | None = None) -> list[Document]:
     path = Path(file_path)
 
     if not path.exists():
@@ -14,7 +14,7 @@ def load_pdf(file_path: str) -> list[Document]:
     if path.suffix.lower() != ".pdf":
         raise ValueError(f"Unsupported file type: {path.suffix}")
 
-    document_id = str(uuid4())
+    resolved_document_id = document_id or str(uuid4())
 
     loader = PyPDFLoader(str(path))
     documents = loader.load()
@@ -22,7 +22,7 @@ def load_pdf(file_path: str) -> list[Document]:
     for document in documents:
         document.metadata.update(
             {
-                "document_id": document_id,
+                "document_id": resolved_document_id,
                 "file_name": path.name,
                 "source": str(path),
                 "page_number": document.metadata.get("page", 0) + 1,

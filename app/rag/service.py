@@ -34,9 +34,9 @@ def prepare_query_with_context(query: str, conversation_context: str | None = No
     )
 
 
-def answer_question(query: str, conversation_context: str | None = None) -> RAGResponse:
+def answer_question(query: str, conversation_context: str | None = None, document_id: str | None = None) -> RAGResponse:
     augmented_query = prepare_query_with_context(query, conversation_context)
-    documents = retrieve(augmented_query)
+    documents = retrieve(augmented_query, document_id=document_id)
 
     if not documents:
         return RAGResponse(

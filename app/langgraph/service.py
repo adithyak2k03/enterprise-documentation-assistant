@@ -11,6 +11,7 @@ from app.retrieval.service import retrieve
 class LangGraphState(TypedDict):
     question: str
     conversation_context: str
+    document_id: str | None
     documents: list[dict[str, Any]]
     answer: str
     sources: list[dict[str, Any]]
@@ -30,7 +31,8 @@ def route_after_verification(state: LangGraphState) -> str:
 
 def retrieve_step(state: LangGraphState) -> LangGraphState:
     question = state["question"]
-    documents = retrieve(question)
+    document_id = state.get("document_id")
+    documents = retrieve(question, document_id=document_id)
 
     return {
         **state,
@@ -52,7 +54,8 @@ def no_documents_step(state: LangGraphState) -> LangGraphState:
 def generate_step(state: LangGraphState) -> LangGraphState:
     question = state["question"]
     conversation_context = state.get("conversation_context") or None
-    response = answer_question(question, conversation_context=conversation_context)
+    document_id = state.get("document_id")
+    response = answer_question(question, conversation_context=conversation_context, document_id=document_id)
 
     return {
         **state,
@@ -110,10 +113,11 @@ def build_graph():
     return graph.compile()
 
 
-def run_question(question: str, conversation_context: str | None = None) -> dict[str, Any]:
+def run_question(question: str, conversation_context: str | None = None, document_id: str | None = None) -> dict[str, Any]:
     return rag_graph.invoke({
         "question": question,
         "conversation_context": conversation_context or "",
+        "document_id": document_id,
     })
 
 

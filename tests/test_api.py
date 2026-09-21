@@ -187,19 +187,21 @@ def test_query_uses_recent_conversation_context(monkeypatch, tmp_path):
 
     captured = {}
 
-    def fake_run_question(question, conversation_context=None):
+    def fake_run_question(question, conversation_context=None, document_id=None):
         captured["question"] = question
         captured["conversation_context"] = conversation_context
+        captured["document_id"] = document_id
         return {"answer": "ok", "sources": [], "context": ""}
 
     monkeypatch.setattr(api, "run_question", fake_run_question)
 
     response = client.post(
         "/query",
-        json={"question": "What about the risks?", "conversation_id": conversation.id},
+        json={"question": "What about the risks?", "conversation_id": conversation.id, "document_id": "doc-99"},
     )
 
     assert response.status_code == 200
     assert captured["question"] == "What about the risks?"
     assert "User: What does this doc cover?" in captured["conversation_context"]
     assert "Assistant: It covers agents." in captured["conversation_context"]
+    assert captured["document_id"] == "doc-99"

@@ -12,7 +12,7 @@ from app.vector_store.service import add_documents
 def _load_document_for_ingestion(file_path: str, file_name: str, document_id: str) -> list[Document]:
     path = Path(file_path)
     if path.suffix.lower() == ".pdf":
-        documents = load_pdf(file_path)
+        documents = load_pdf(file_path, document_id=document_id)
     else:
         text = path.read_text(encoding="utf-8")
         documents = [
@@ -93,8 +93,8 @@ def ingest_document(document: DocumentRecord) -> IngestionResult:
         )
 
 
-def ingest_pdf(file_path: str) -> list[Document]:
-    documents = load_pdf(file_path)
+def ingest_pdf(file_path: str, document_id: str | None = None) -> list[Document]:
+    documents = load_pdf(file_path, document_id=document_id)
     chunks = split_documents(documents)
 
     add_documents(chunks)

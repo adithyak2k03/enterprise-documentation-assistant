@@ -126,4 +126,16 @@ class DocumentService:
         with self._connect() as conn:
             cursor = conn.execute("DELETE FROM documents WHERE id = ?", (document_id,))
 
+        try:
+            from app.vector_store.chroma import create_vector_store
+
+            vector_store = create_vector_store()
+            if hasattr(vector_store, "delete"):
+                try:
+                    vector_store.delete(where={"document_id": document_id})
+                except TypeError:
+                    vector_store.delete(filter={"document_id": document_id})
+        except Exception:
+            pass
+
         return cursor.rowcount > 0
